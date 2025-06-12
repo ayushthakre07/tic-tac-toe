@@ -1,0 +1,258 @@
+<html>
+    <head>
+        <title>
+            Tic Tac Toe
+        </title>
+        <style>
+
+            .body{
+               background-color: #B6F500;
+                display: flex;
+                flex-direction:row ;
+               box-shadow: 0 0 20px 5px #B6F500;
+                margin:40px auto;
+                flex-wrap: wrap ;
+                height: 480px;
+                width: 450px;
+                border-radius: 40px;            
+            }
+            .eachbox{
+                margin: 20px;
+                height: 70px;
+                width: 70px;
+                border: 2px solid #000;
+              padding: 18px;
+               border-radius: 40px;
+            }
+            .eachbox:hover{
+                transition: 0.3s;
+                cursor: pointer;
+                box-shadow: 0 0 10px 5px #000;
+            }
+            .playerturn{
+               text-align: center;
+                font-size: 30px;
+                margin: -10px auto;
+                color: #f40905;
+            }
+            .player-div{
+                height: 220px;
+                 width: 300px;
+                 border: 2px solid #B6F500;
+                 border-radius: 50px;
+                
+            }
+            .player-1-2{
+                color: #B6F500;
+               margin:0 auto ;
+                font-size: 30px;
+                margin: 30px;
+                text-decoration: underline;
+
+            }
+            .imagestyle{
+             height: 40px;
+             width: 40px;
+             background-color: #B6F500;
+            }
+            .hr{
+                height: 3px;
+               background-color: #B6F500;
+               border-radius: 50%;
+            }
+            .tic-tac-toe-img{
+                background-color: #B6F500;
+                height: 40px;
+                width: 40px;
+                transform: rotate(-15deg);
+            }
+        </style>
+    </head>
+    <body style="background-color: #000; font-family: 'Courier New', Courier, monospace; " >
+        <div class="player-div">
+        <div class="player-1-2">
+            Player 1 : <img src="./checked.png" class="imagestyle">
+        </div>
+        <hr class="hr">
+         <div class="player-1-2">
+            Player 2 : <img src="./circle.png" class="imagestyle">
+        </div>
+        </div>
+        <h1 style="text-align: center;color: #B6F500; margin-top: -220px;font-size: 50px;">
+    Tic Tac Toe <img src="./three-in-a-row.png" class="tic-tac-toe-img">
+</h1>
+<p class="playerturn" id="player1">
+    
+</p >
+
+        <div class="body" id="board">
+
+
+            <div class="eachbox ">
+            
+            </div>
+            <div class="eachbox ">
+                
+            </div>
+            <div class="eachbox">
+                
+            </div>
+            
+            <div class="eachbox">
+                
+            </div>
+            
+            <div class="eachbox">
+                
+            </div>
+            
+            <div class="eachbox">
+                
+            </div>
+            <div class="eachbox">
+                
+            </div>
+            <div class="eachbox">
+                
+            </div>
+            <div class="eachbox">
+                
+            </div>
+        </div>
+
+        <script>
+
+const number=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
+
+let turn=1;
+
+    const playerImage={
+        1:"checked.png",
+        2:"circle.png",
+    };
+
+function renderBoard(){
+    const numberElement=document.getElementById("board");
+    numberElement.innerHTML=``;
+   
+    const player1Element=document.getElementById("player1");
+    player1Element.innerHTML=`Turn of Player ${turn} `;
+
+    number.forEach((cellValue, index)=>{
+
+const cellPlayerImage=playerImage[cellValue];
+
+        const cellImage= cellPlayerImage ? `<img src="${playerImage[cellValue]}">`: "";
+ 
+         numberElement.innerHTML +=`<div class="eachbox ${cellValue}
+          " onclick="handleTurn(${index})">
+          ${cellImage}
+           </div>`;
+    });
+
+
+     checkWinner();
+}
+renderBoard();
+
+
+function handleTurn(cellIndex){
+    if(number[cellIndex] ==-1){
+       number[cellIndex]=turn;
+       turn = turn ==1 ? 2 : 1;
+       renderBoard();
+    }
+    else
+    {
+        alert("Invalid Move");
+        return;
+    }
+
+}
+function checkWinner(){
+    const P1=1;
+    const P2=2;
+ 
+
+    if(checkPlayerForPosition(P1,0,1,2))
+    {
+        alert("Player 1 win");
+
+    }    
+    else if(checkPlayerForPosition(P2,0,1,2))
+    {
+        alert("Player 2 win");
+
+    }   
+     else if(checkPlayerForPosition(P1,3,4,5))
+    {
+        alert("Player 1 win");
+
+    }    else if(checkPlayerForPosition(P2,3,4,5))
+    {
+        alert("Player 2 win");
+
+    }    else if(checkPlayerForPosition(P1,6,7,8))
+    {
+        alert("Player 1 win");
+
+    }    else if(checkPlayerForPosition(P2,6,7,8))
+    {
+        alert("Player 2 win");
+
+    }    else if(checkPlayerForPosition(P1,2,4,6))
+    {
+        alert("Player 1 win");
+
+    }    else if(checkPlayerForPosition(P2,2,4,6))
+    {
+        alert("Player 2 win");
+
+    }    else if(checkPlayerForPosition(P1,0,4,8))
+    {
+        alert("Player 1 win");
+
+    }    else if(checkPlayerForPosition(P2,0,4,8))
+    {
+        alert("Player 2 win");
+
+    }    else if(checkPlayerForPosition(P1,0,3,6))
+    {
+        alert("Player 1 win");
+
+    }    else if(checkPlayerForPosition(P2,0,3,6))
+    {
+        alert("Player 2 win");
+
+    }    else if(checkPlayerForPosition(P1,1,4,7))
+    {
+        alert("Player 1 win");
+
+    }    else if(checkPlayerForPosition(P2,1,4,7))
+    {
+        alert("Player 2 win");
+
+    }    else if(checkPlayerForPosition(P1,2,5,8))
+    {
+        alert("Player 1 win");
+
+    }    else if (checkPlayerForPosition(P2,2,5,8))
+    {
+        alert("Player 2 win");
+    }    
+}
+
+
+function checkPlayerForPosition(player, p1, p2,p3){
+    if(number[p1]==player && number[p2]==player && number[p3]==player )
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+            </script>
+    </body>
+</html>
