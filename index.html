@@ -1,258 +1,162 @@
-<html>
-    <head>
-        <title>
-            Tic Tac Toe
-        </title>
-        <style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe - Pixel Theme</title>
+    <style>
+        body {
+            background-color: #1b1b00;
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 40px;
+            color: #fff200;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-            .body{
-               background-color: #B6F500;
-                display: flex;
-                flex-direction:row ;
-               box-shadow: 0 0 20px 5px #B6F500;
-                margin:40px auto;
-                flex-wrap: wrap ;
-                height: 480px;
-                width: 450px;
-                border-radius: 40px;            
-            }
-            .eachbox{
-                margin: 20px;
-                height: 70px;
-                width: 70px;
-                border: 2px solid #000;
-              padding: 18px;
-               border-radius: 40px;
-            }
-            .eachbox:hover{
-                transition: 0.3s;
-                cursor: pointer;
-                box-shadow: 0 0 10px 5px #000;
-            }
-            .playerturn{
-               text-align: center;
-                font-size: 30px;
-                margin: -10px auto;
-                color: #f40905;
-            }
-            .player-div{
-                height: 220px;
-                 width: 300px;
-                 border: 2px solid #B6F500;
-                 border-radius: 50px;
-                
-            }
-            .player-1-2{
-                color: #B6F500;
-               margin:0 auto ;
-                font-size: 30px;
-                margin: 30px;
-                text-decoration: underline;
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff200;
+            text-shadow: 3px 3px #ff0000;
+        }
 
-            }
-            .imagestyle{
-             height: 40px;
-             width: 40px;
-             background-color: #B6F500;
-            }
-            .hr{
-                height: 3px;
-               background-color: #B6F500;
-               border-radius: 50%;
-            }
-            .tic-tac-toe-img{
-                background-color: #B6F500;
-                height: 40px;
-                width: 40px;
-                transform: rotate(-15deg);
-            }
-        </style>
-    </head>
-    <body style="background-color: #000; font-family: 'Courier New', Courier, monospace; " >
-        <div class="player-div">
-        <div class="player-1-2">
-            Player 1 : <img src="./checked.png" class="imagestyle">
-        </div>
-        <hr class="hr">
-         <div class="player-1-2">
-            Player 2 : <img src="./circle.png" class="imagestyle">
-        </div>
-        </div>
-        <h1 style="text-align: center;color: #B6F500; margin-top: -220px;font-size: 50px;">
-    Tic Tac Toe <img src="./three-in-a-row.png" class="tic-tac-toe-img">
-</h1>
-<p class="playerturn" id="player1">
-    
-</p >
+        .game-container {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+        }
 
-        <div class="body" id="board">
+        .player-panel {
+            width: 300px;
+            height: 220px;
+            border: 5px solid #ff0000;
+            border-radius: 6px;
+            background-color: #333300;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 15px;
+        }
 
+        .player-info {
+            font-size: 16px;
+            text-align: center;
+            color: #ffcc00;
+            text-decoration: underline;
+        }
 
-            <div class="eachbox ">
-            
-            </div>
-            <div class="eachbox ">
-                
-            </div>
-            <div class="eachbox">
-                
-            </div>
-            
-            <div class="eachbox">
-                
-            </div>
-            
-            <div class="eachbox">
-                
-            </div>
-            
-            <div class="eachbox">
-                
-            </div>
-            <div class="eachbox">
-                
-            </div>
-            <div class="eachbox">
-                
-            </div>
-            <div class="eachbox">
-                
-            </div>
+        .current-turn {
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ff3300;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 120px);
+            grid-template-rows: repeat(3, 120px);
+            gap: 12px;
+            background-color: #333300;
+            padding: 12px;
+            border: 5px solid #ff0000;
+            border-radius: 6px;
+        }
+
+        .cell {
+            width: 120px;
+            height: 120px;
+            background-color: #fff200;
+            border: 4px solid #ff0000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+            color: #ff0000;
+            cursor: pointer;
+            box-shadow: inset 0 0 6px #ffcc00;
+            transition: all 0.2s;
+        }
+
+        .cell:hover {
+            background-color: #ffeb66;
+            box-shadow: inset 0 0 8px #ff0000;
+        }
+
+        img {
+            width: 48px;
+            height: 48px;
+        }
+    </style>
+</head>
+<body>
+    <h1>TIC TAC TOE <img src="./three-in-a-row.png" alt="Tic Tac Toe"></h1>
+
+    <div class="current-turn" id="currentTurn"></div>
+
+    <div class="game-container">
+        <div class="player-panel">
+            <div class="player-info">Player 1: <img src="./checked.png" alt="X"></div>
+            <div class="player-info">Player 2: <img src="./circle.png" alt="O"></div>
         </div>
 
-        <script>
+        <div class="board" id="board"></div>
+    </div>
 
-const number=[-1,-1,-1,-1,-1,-1,-1,-1,-1];
+    <script>
+        const boardState = Array(9).fill(-1);
+        let currentPlayer = 1;
+        const playerIcons = {1: "checked.png", 2: "circle.png"};
 
-let turn=1;
+        function renderBoard() {
+            const board = document.getElementById("board");
+            const turnDisplay = document.getElementById("currentTurn");
+            turnDisplay.textContent = `Turn: Player ${currentPlayer}`;
 
-    const playerImage={
-        1:"checked.png",
-        2:"circle.png",
-    };
+            board.innerHTML = "";
+            boardState.forEach((cell, index) => {
+                const icon = cell !== -1 ? `<img src="${playerIcons[cell]}" alt="">` : "";
+                const div = document.createElement("div");
+                div.className = "cell";
+                div.innerHTML = icon;
+                div.addEventListener("click", () => handleMove(index));
+                board.appendChild(div);
+            });
 
-function renderBoard(){
-    const numberElement=document.getElementById("board");
-    numberElement.innerHTML=``;
-   
-    const player1Element=document.getElementById("player1");
-    player1Element.innerHTML=`Turn of Player ${turn} `;
+            checkWinner();
+        }
 
-    number.forEach((cellValue, index)=>{
+        function handleMove(index) {
+            if (boardState[index] !== -1) {
+                alert("Invalid Move!");
+                return;
+            }
 
-const cellPlayerImage=playerImage[cellValue];
+            boardState[index] = currentPlayer;
+            currentPlayer = currentPlayer === 1 ? 2 : 1;
+            renderBoard();
+        }
 
-        const cellImage= cellPlayerImage ? `<img src="${playerImage[cellValue]}">`: "";
- 
-         numberElement.innerHTML +=`<div class="eachbox ${cellValue}
-          " onclick="handleTurn(${index})">
-          ${cellImage}
-           </div>`;
-    });
+        function checkWinner() {
+            const winningCombinations = [
+                [0,1,2],[3,4,5],[6,7,8],
+                [0,3,6],[1,4,7],[2,5,8],
+                [0,4,8],[2,4,6]
+            ];
 
+            for (const combo of winningCombinations) {
+                const [a, b, c] = combo;
+                if (boardState[a] !== -1 && boardState[a] === boardState[b] && boardState[a] === boardState[c]) {
+                    setTimeout(() => alert(`Player ${boardState[a]} wins!`), 100);
+                    return;
+                }
+            }
+        }
 
-     checkWinner();
-}
-renderBoard();
-
-
-function handleTurn(cellIndex){
-    if(number[cellIndex] ==-1){
-       number[cellIndex]=turn;
-       turn = turn ==1 ? 2 : 1;
-       renderBoard();
-    }
-    else
-    {
-        alert("Invalid Move");
-        return;
-    }
-
-}
-function checkWinner(){
-    const P1=1;
-    const P2=2;
- 
-
-    if(checkPlayerForPosition(P1,0,1,2))
-    {
-        alert("Player 1 win");
-
-    }    
-    else if(checkPlayerForPosition(P2,0,1,2))
-    {
-        alert("Player 2 win");
-
-    }   
-     else if(checkPlayerForPosition(P1,3,4,5))
-    {
-        alert("Player 1 win");
-
-    }    else if(checkPlayerForPosition(P2,3,4,5))
-    {
-        alert("Player 2 win");
-
-    }    else if(checkPlayerForPosition(P1,6,7,8))
-    {
-        alert("Player 1 win");
-
-    }    else if(checkPlayerForPosition(P2,6,7,8))
-    {
-        alert("Player 2 win");
-
-    }    else if(checkPlayerForPosition(P1,2,4,6))
-    {
-        alert("Player 1 win");
-
-    }    else if(checkPlayerForPosition(P2,2,4,6))
-    {
-        alert("Player 2 win");
-
-    }    else if(checkPlayerForPosition(P1,0,4,8))
-    {
-        alert("Player 1 win");
-
-    }    else if(checkPlayerForPosition(P2,0,4,8))
-    {
-        alert("Player 2 win");
-
-    }    else if(checkPlayerForPosition(P1,0,3,6))
-    {
-        alert("Player 1 win");
-
-    }    else if(checkPlayerForPosition(P2,0,3,6))
-    {
-        alert("Player 2 win");
-
-    }    else if(checkPlayerForPosition(P1,1,4,7))
-    {
-        alert("Player 1 win");
-
-    }    else if(checkPlayerForPosition(P2,1,4,7))
-    {
-        alert("Player 2 win");
-
-    }    else if(checkPlayerForPosition(P1,2,5,8))
-    {
-        alert("Player 1 win");
-
-    }    else if (checkPlayerForPosition(P2,2,5,8))
-    {
-        alert("Player 2 win");
-    }    
-}
-
-
-function checkPlayerForPosition(player, p1, p2,p3){
-    if(number[p1]==player && number[p2]==player && number[p3]==player )
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-            </script>
-    </body>
+        renderBoard();
+    </script>
+</body>
 </html>
